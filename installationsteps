@@ -1,4 +1,4 @@
---how to install java 17 on mac
+--how to install java 17 on mac with m2 chip
 1. go to https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
 2. download macOS Arm 64 DMG Installer and install from mac (you need to choose this installer if you have M1/M2 chip)
 3. test java installed successfully or not by running java -version
