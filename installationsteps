@@ -1,0 +1,40 @@
+--how to install java 17 on mac
+1. go to https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+2. download macOS Arm 64 DMG Installer and install from mac (you need to choose this installer if you have M1/M2 chip)
+3. test java installed successfully or not by running java -version
+
+--how to install scala
+1. run the curl command on terminal: curl -fL https://github.com/VirtusLab/coursier-m1/releases/latest/download/cs-aarch64-apple-darwin.gz | gzip -d > cs && chmod +x cs && (xattr -d com.apple.quarantine cs || true) && ./cs setup
+2. test scala installed successfully or not by running scala -version (might need to run this in a new terminal window)
+
+--how to install apache spark
+1. brew install apache-spark
+
+
+test pyspark by running this:
+
+suhailmemon@M-PWG27J5L7D udemy_bigdatapyspark % pyspark
+Python 3.12.1 (v3.12.1:2305ca5144, Dec  7 2023, 17:23:39) [Clang 13.0.0 (clang-1300.0.29.30)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+24/12/10 20:34:45 WARN Utils: Your hostname, M-PWG27J5L7D resolves to a loopback address: 127.0.0.1; using 192.168.0.3 instead (on interface en0)
+24/12/10 20:34:45 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+24/12/10 20:34:46 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+24/12/10 20:34:46 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+24/12/10 20:34:46 WARN Utils: Service 'SparkUI' could not bind on port 4041. Attempting port 4042.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /__ / .__/\_,_/_/ /_/\_\   version 3.5.3
+      /_/
+
+Using Python version 3.12.1 (v3.12.1:2305ca5144, Dec  7 2023 17:23:39)
+Spark context Web UI available at http://192.168.0.3:4042
+Spark context available as 'sc' (master = local[*], app id = local-1733888086877).
+SparkSession available as 'spark'.
+>>> quit()
+suhailmemon@M-PWG27J5L7D udemy_bigdatapyspark %
+suhailmemon@M-PWG27J5L7D udemy_bigdatapyspark %
+suhailmemon@M-PWG27J5L7D udemy_bigdatapyspark %
