@@ -14,8 +14,6 @@ words=input.flatMap(normalizeWords)
 wordCounts=words.map(lambda x:(x,1)).reduceByKey(lambda x,y:x+y)
 wordCounts_flipped=wordCounts.map(lambda x: (x[1], x[0]))
 wordCountsSorted=wordCounts_flipped.sortByKey()
-#wordCounts_temp=wordCounts.map(lambda x,y:(y,x)).sortByKey()
-#wordCountsSorted = wordCounts.sortBy(lambda x: (x[1]), ascending=False).map(lambda x: (x[1], x[0]))
 results=wordCountsSorted.collect()
 for eachrow in results:
     cleanword=eachrow[1].encode('ascii','ignore')
