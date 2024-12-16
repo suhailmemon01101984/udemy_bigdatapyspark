@@ -7,7 +7,7 @@ sc=SparkContext(conf=sparkconfig)
 sc.setLogLevel("ERROR")
 
 def normalizeWords(text):
-    return re.compile(r'\W+',re.UNICODE).split(text.lower())
+    return re.compile(r'\W+',re.UNICODE).split(text.lower()) #\W+ to remove all non word characters and use it as a splitting pattern
 
 input=sc.textFile("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/book")
 words=input.flatMap(normalizeWords)
