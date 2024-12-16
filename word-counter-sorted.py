@@ -12,8 +12,8 @@ def normalizeWords(text):
 input=sc.textFile("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/book")
 words=input.flatMap(normalizeWords)
 wordCounts=words.map(lambda x:(x,1)).reduceByKey(lambda x,y:x+y)
-wordCounts_flipped=wordCounts.map(lambda x: (x[1], x[0]))
-wordCountsSorted=wordCounts_flipped.sortByKey()
+wordCounts_flipped=wordCounts.map(lambda x: (x[1], x[0])) # here you are making sure that count becomes the first column (key) and the word becomes the second column
+wordCountsSorted=wordCounts_flipped.sortByKey() # this will sort the data by count ascending
 results=wordCountsSorted.collect()
 for eachrow in results:
     cleanword=eachrow[1].encode('ascii','ignore')
