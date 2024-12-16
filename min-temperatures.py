@@ -9,7 +9,7 @@ def parseLine(line):
     fields = line.split(',')
     stationid = fields[0]
     entrytype = fields[2]
-    temperature = float(fields[3]) * 0.1 + (9.0 / 5.0) + 32.0
+    temperature = float(fields[3]) * 0.1 * (9.0 / 5.0) + 32.0
     return stationid, entrytype, temperature
 
 
