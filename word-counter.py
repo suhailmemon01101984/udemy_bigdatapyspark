@@ -15,5 +15,5 @@ wordCounts=words.countByValue()
 for word,count in wordCounts.items():
     cleanword=word.encode('ascii','ignore')
     if(cleanword):
-        print(cleanword.decode(), count)
+        print(cleanword.decode(), count) #this .decode() was added to change from binary format to string...so eg: from  b'mindful' to just mindful
 quit()
