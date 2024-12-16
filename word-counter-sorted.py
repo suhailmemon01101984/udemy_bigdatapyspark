@@ -16,7 +16,7 @@ wordCounts_flipped=wordCounts.map(lambda x: (x[1], x[0])) # here you are making 
 wordCountsSorted=wordCounts_flipped.sortByKey() # this will sort the data by count ascending
 results=wordCountsSorted.collect()
 for eachrow in results:
-    cleanword=eachrow[1].encode('ascii','ignore')
+    cleanword=eachrow[1].encode('ascii','ignore') #this encodes each word in ascii formats and ignore any errors that result as part of this conversion
     if(cleanword):
         print(f'{cleanword.decode()}:        {eachrow[0]}') #this .decode() was added to change from binary format to string...so eg: from  b'mindful' to just mindful
 quit()
