@@ -19,6 +19,6 @@ teenagers=sparkSessn.sql("select * from people_vw where age>=13 and age<=19")
 for teen in teenagers.collect():
     print(teen)
 
-schemaPeople.groupBy("age").count().orderBy("age").show()
+schemaPeople.groupBy("age").count().orderBy("age").show() #alternative way to get outputs instead of running sql queries. this will get age and do a count by age and then sort by age and display the results
 
 sparkSessn.stop()
