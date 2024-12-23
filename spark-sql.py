@@ -23,6 +23,7 @@ for teen in teenagers.collect():
 
 schemaPeople.groupBy("age").count().orderBy("age").show() #alternative way to get outputs instead of running sql queries. this will get age and do a count by age and then sort by age and display the results
 
+#get the same result using simple sql
 teenagers=sparkSessn.sql("select age, count(*) from people_vw group by 1 order by 2 desc")
 
 for teen in teenagers.collect():
