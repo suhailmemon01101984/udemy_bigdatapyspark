@@ -16,9 +16,16 @@ schemaPeople.createOrReplaceTempView("people_vw")
 
 teenagers=sparkSessn.sql("select * from people_vw where age>=13 and age<=19")
 
+print(type(teenagers))
+
 for teen in teenagers.collect():
     print(teen)
 
 schemaPeople.groupBy("age").count().orderBy("age").show() #alternative way to get outputs instead of running sql queries. this will get age and do a count by age and then sort by age and display the results
+
+teenagers=sparkSessn.sql("select age, count(*) from people_vw group by 1 order by 2 desc")
+
+for teen in teenagers.collect():
+    print(teen)
 
 sparkSessn.stop()
