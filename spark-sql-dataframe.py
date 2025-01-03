@@ -5,6 +5,8 @@ sparkSessn=SparkSession.builder.appName("SparkSQL").getOrCreate()
 #if your file has header...you don't need to do the extra hop to rdd and then create a df out of it like in earlier example. using command below you can create df directly.
 peopleDF=sparkSessn.read.option("header","true").option("inferSchema","true").csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/fakefriends-header.csv")
 
+print(type(peopleDF))
+
 peopleDF.printSchema()
 
 peopleDF.select("name").show() #shows top 20 rows
