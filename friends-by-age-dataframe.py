@@ -14,7 +14,7 @@ friendsbyage.groupBy("age").avg("friends").sort("age").show()
 
 friendsbyage.groupBy("age").agg(func.round(func.avg("friends"),2)).sort("age").show()
 
-friendsbyage.groupBy("age").agg(func.round(func.avg("friends"),2)).alias("friends_avg").sort("age").show()
+friendsbyage.groupBy("age").agg(func.round(func.avg("friends"),2).alias("friends_avg")).sort("age").show()
 
 #doing same code with sql after creating a view below
 peopleDF.createOrReplaceTempView("people_header_vw")
