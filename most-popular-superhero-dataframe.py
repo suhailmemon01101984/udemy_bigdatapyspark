@@ -19,6 +19,7 @@ lines=sparkSessn.read.text("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/
 print(type(lines))
 
 lines.show()
+
 superheroConnectionsStage=lines.withColumn("id", func.split(func.col("value"), " ")[0]) \
     .withColumn("connections", func.size(func.split(func.col("value"), " "))-1)
 
