@@ -135,3 +135,5 @@ for iteration in range(0, 10):
     # Reducer combines data for each character ID, preserving the darkest
     # color and shortest path.
     iterationRdd = mapped.reduceByKey(bfsReduce)
+
+quit()
