@@ -78,7 +78,7 @@ query = """
 """
 
 # Execute the SQL query
-moviePairSimilarities = sparkSessn.sql(query)
+moviePairSimilarities = sparkSessn.sql(query).cache()
 moviePairSimilarities.createOrReplaceTempView("moviePairSimilarities_vw")
 
 # ratings=movies.select("userID", "movieID", "rating")
