@@ -1,6 +1,8 @@
+#run below code with parameter as 50 which is the movieID for starwars. right click on file -> modify run configuration and put 50 under parameters and click OK
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as func
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType, LongType
+import sys
 
 def computeCosineSimilarity(data):
     # Compute xx, xy and yy columns
@@ -71,28 +73,31 @@ moviePairSimilarities = computeCosineSimilarity(moviePairsWithNames).cache()
 
 #moviePairSimilarities.show()
 
-#movieID 50 is starwars. we are trying to get similar movies to that
-movieID=50
-scoreThreshold=0.97
-coOccurenceThreshold=50
 
-filteredResults=moviePairSimilarities.filter( \
-    ((func.col("movie1")==movieID) | (func.col("movie2")==movieID)) & \
-    (func.col("score") > scoreThreshold) & \
-    (func.col("numPairs") > coOccurenceThreshold) \
-    )
+if (len(sys.argv) > 1):
+    #movieID 50 is starwars. we are trying to get similar movies to that
+    #movieID=50
+    inputmovieID = int(sys.argv[1])
+    scoreThreshold=0.97
+    coOccurenceThreshold=50
 
-#filteredResults.show()
+    filteredResults=moviePairSimilarities.filter( \
+        ((func.col("movie1") == inputmovieID) | (func.col("movie2") == inputmovieID)) & \
+        (func.col("score") > scoreThreshold) & \
+        (func.col("numPairs") > coOccurenceThreshold) \
+        )
 
-#sort by score desc and take top 10 rows
-results=filteredResults.sort(func.col("score").desc()).take(10)
+    #filteredResults.show()
 
-for result in results:
-    similarMovieID=result.movie1
-    if similarMovieID==movieID:
-        print(f"{result.movie2Name} \tscore:{result.score} \tstrength:{result.numPairs}")
-    else:
-        print(f"{result.movie1Name} \tscore:{result.score} \tstrength:{result.numPairs}")
+    #sort by score desc and take top 10 rows
+    results=filteredResults.sort(func.col("score").desc()).take(10)
+
+    for result in results:
+        similarMovieID=result.movie1
+        if similarMovieID==inputmovieID:
+            print(f"{result.movie2Name} \tscore:{result.score} \tstrength:{result.numPairs}")
+        else:
+            print(f"{result.movie1Name} \tscore:{result.score} \tstrength:{result.numPairs}")
 
 
 sparkSessn.stop()
