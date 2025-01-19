@@ -1,3 +1,5 @@
+#this script similar to movie-similarities-1m.py. use movie-similarities-1m.py to run local whereas use this file to run in emr cluster
+#key changes. updated ratings file to the file containing 1M records. commented section where you are adding jars and aws key and secret
 from pyspark import SparkConf, SparkContext
 import boto3
 from io import StringIO
@@ -52,11 +54,11 @@ def computeCosineSimilarity(movie_Pair_Ratings):
 
 sparkconfig=SparkConf()
 #these jars need to be added before you start dealing with aws files. this step only needs to be done if you are trying to run from local machine. if you run this code in EC2 EMR instance like it's primary node, you don't need this step
-sparkconfig = SparkConf() \
-    .set("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.2.0,com.amazonaws:aws-java-sdk:1.11.950") \
-    .set("spark.hadoop.fs.s3a.aws.credentials.provider", "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider") \
-    .set("spark.hadoop.fs.s3a.access.key", "myawsaccesskeyid") \
-    .set("spark.hadoop.fs.s3a.secret.key", "myawssecretaccesskey")
+# sparkconfig = SparkConf() \
+#     .set("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.2.0,com.amazonaws:aws-java-sdk:1.11.950") \
+#     .set("spark.hadoop.fs.s3a.aws.credentials.provider", "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider") \
+#     .set("spark.hadoop.fs.s3a.access.key", "myawsaccesskeyid") \
+#     .set("spark.hadoop.fs.s3a.secret.key", "myawssecretaccesskey")
 
 sc=SparkContext(conf=sparkconfig)
 sc.setLogLevel("ERROR")
@@ -64,12 +66,10 @@ sc.setLogLevel("ERROR")
 movieIDmovieNameDict=loadMovieNames()
 
 #change this to ratings.dat when you run on EMR cluster in AWS
-data=sc.textFile("s3a://suhailmemon84-ml-1m/ratings-100k.dat")
+data=sc.textFile("s3a://suhailmemon84-ml-1m/ratings.dat")
 
 # Map ratings to key / value pairs: user ID => movie ID, rating
-ratings=data.map(lambda l:l.split("::")).map(lambda l:(int(l[0]),(int(l[1]),int(l[2]))))#.take(10)
-# for row in ratings:
-#     print(row)
+ratings=data.map(lambda l:l.split("::")).map(lambda l:(int(l[0]),(int(l[1]),int(l[2]))))
 
 #partition the data by key which in this case is user id. this is done for faster joins
 # Self-join to find every combination.

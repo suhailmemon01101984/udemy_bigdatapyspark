@@ -46,3 +46,14 @@ EEEEEEEEEEEEEEEEEEEE MMMMMMM             MMMMMMM RRRRRRR      RRRRRR
 
 [hadoop@ip-172-31-15-17 ~]$
 
+#step 6: upload the file: movie-similarities-1m-emr.py under /home/hadoop and chmod 777 on it
+
+#step 7: run the python file: python movie-similarities-1m-emr.py you will get an error something along the lines of following:
+
+AttributeError: module 'awscrt.checksums' has no attribute 'crc64nvme'
+
+steps to fix error:
+
+run: pip install --upgrade boto3 botocore awscrt
+
+then rerun the command again: python movie-similarities-1m-emr.py
