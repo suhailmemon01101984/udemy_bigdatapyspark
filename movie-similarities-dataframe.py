@@ -39,8 +39,8 @@ movieSchema= StructType([StructField("userID", IntegerType(), True), \
                          StructField("rating", IntegerType(), True), \
                          StructField("timestamp", LongType(), True)])
 
-movieNames=sparkSessn.read.option("sep", "|").schema(movieNameSchema).csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/ml-100k/u.item")
-movies=sparkSessn.read.option("sep", "\t").schema(movieSchema).csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/ml-100k/u.data")
+movieNames=sparkSessn.read.option("sep", "|").schema(movieNameSchema).csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/ml-100k/u.item")
+movies=sparkSessn.read.option("sep", "\t").schema(movieSchema).csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/ml-100k/u.data")
 
 #movieNames.show()
 #movies.show()
