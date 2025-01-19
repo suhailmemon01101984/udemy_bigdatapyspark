@@ -1,5 +1,5 @@
 # this is a full redo of movie-similarities-dataframe.py but through using pyspark sql views. run below code with parameter as 50 which is the movieID for starwars. right click on file -> modify run configuration and put 50 under parameters and click OK
-#comment here
+#comment here here
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType, LongType
 import sys
