@@ -10,7 +10,7 @@ sc=SparkContext(conf=sparkconfig)
 sc.setLogLevel("ERROR")
 #use the textfile method to. the textfile breaks up this u.data file line by line and every line corresponds to one value in the rdd.
 #so if your file u.data has 5 lines then your rdd will have 5 values with each value being the string that represents the whole line of text
-lines=sc.textFile("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/ml-100k/u.data")
+lines=sc.textFile("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/ml-100k/u.data")
 #call the map function with input as the lines rdd where for each line you will split that line by space and then get the values in the 3rd column
 ratings=lines.map(lambda x:x.split()[2])
 #call the countbyvalue function to count number of occurrences of each value

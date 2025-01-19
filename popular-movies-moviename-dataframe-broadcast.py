@@ -5,7 +5,7 @@ from pyspark.sql.types import IntegerType, LongType, StructType, StructField
 def loadMovieNames():
     movieNames={}
     #previously i wrote the with.open command without the encoding and errors section but then it failed that default encoding of utf-8 doesn't work for this file. so i had to add the ISO encoding section to read the file correctly
-    with open('/datafiles/ml-100k/u.item', 'r', encoding='ISO-8859-1', errors='ignore') as f:
+    with open('/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/ml-100k/u.item', 'r', encoding='ISO-8859-1', errors='ignore') as f:
         for line in f:
             fields=line.split('|')
             movieNames[int(fields[0])]=fields[1]
@@ -23,7 +23,7 @@ movieSchema= StructType([StructField("userID", IntegerType(), True), \
                          StructField("rating", IntegerType(), True), \
                          StructField("timestamp", IntegerType(), True)])
 
-moviesDF=sparkSessn.read.option("sep", "\t").schema(movieSchema).csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/ml-100k/u.data")
+moviesDF=sparkSessn.read.option("sep", "\t").schema(movieSchema).csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/ml-100k/u.data")
 
 movieCounts=moviesDF.groupBy("movieID").count().withColumnRenamed("count", "ratings_count")
 
