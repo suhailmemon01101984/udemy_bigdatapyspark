@@ -34,8 +34,8 @@ movienameSchema= StructType([StructField("movieID", IntegerType(), True), \
                              StructField("war", IntegerType(), True), \
                              StructField("western", IntegerType(), True)])
 
-moviesDF=sparkSessn.read.option("sep", "\t").schema(movieSchema).csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/ml-100k/u.data")
-movienameDF=sparkSessn.read.option("sep", "|").schema(movienameSchema).csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/ml-100k/u.item")
+moviesDF=sparkSessn.read.option("sep", "\t").schema(movieSchema).csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/ml-100k/u.data")
+movienameDF=sparkSessn.read.option("sep", "|").schema(movienameSchema).csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/ml-100k/u.item")
 
 moviesDF.printSchema()
 movienameDF.printSchema()
