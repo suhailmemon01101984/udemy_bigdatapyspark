@@ -9,7 +9,7 @@ movieSchema = StructType([StructField("userID", IntegerType(), True),
                           StructField("rating", IntegerType(), True),
                           StructField("timestamp", LongType(), True)])
 
-moviesDF = sparkSessn.read.option("sep", "\t").schema(movieSchema).csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/ml-100k/u.data")
+moviesDF = sparkSessn.read.option("sep", "\t").schema(movieSchema).csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/ml-100k/u.data")
 
 topMovieIDs = moviesDF.groupBy("movieID").count().orderBy(func.desc("count")) # do func.desc to sort by descending order of count
 
