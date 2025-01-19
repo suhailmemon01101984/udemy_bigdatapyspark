@@ -3,7 +3,7 @@ login to aws...go into EC2 and create a key pair download the .pem file. put it 
 
 #step 2
 login to aws and go under emr and click on create cluster. under security config and ec2 key pair...browse to the key pair you created earlier
-under iam roles...click on create a service role....under ec2 instance profile for emr...click on create an instance profile and then click on create cluster button
+under iam roles...click on create a service role....under ec2 instance profile for emr...click on create an instance profile and choose the option: "All S3 buckets in this account with read and write access" and then click on create cluster button
 
 #step 3
 wait until cluster is created and status changes to waiting
