@@ -1,0 +1,48 @@
+#step 1
+login to aws...go into EC2 and create a key pair download the .pem file. put it in your ~/ folder (users/suhailmemon folder) and chmod it to 400
+
+#step 2
+login to aws and go under emr and click on create cluster. under security config and ec2 key pair...browse to the key pair you created earlier
+under iam roles...click on create a service role....under ec2 instance profile for emr...click on create an instance profile and then click on create cluster button
+
+#step 3
+wait until cluster is created and status changes to waiting
+
+#step 4
+click on your cluster go under instances(hardware) and locate the instance id of the primary node
+go under that instance id, go under security, click the security groups (for me my security group was like: sg-0602754def8c5bf2d(elasticmapreduce-master)
+go under inbound rules and click edit inbound rules and add rule for ipv4, ssh, get your ip address (i got my ip from https://whatismyipaddress.com/)
+then plug in that ip address as <ip>/32 (so for eg: if your ip is 87.198.178.267 then key in 87.198.178.267/32) and then click on save rules
+
+#step 5
+try to login via ssh to the primary node. i ran this command
+
+suhailmemon@M-PWG27J5L7D ~ % ssh -i ~/spark-key-pair.pem hadoop@ec2-44-197-241-194.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Sun Jan 19 05:36:56 2025
+
+EEEEEEEEEEEEEEEEEEEE MMMMMMMM           MMMMMMMM RRRRRRRRRRRRRRR
+E::::::::::::::::::E M:::::::M         M:::::::M R::::::::::::::R
+EE:::::EEEEEEEEE:::E M::::::::M       M::::::::M R:::::RRRRRR:::::R
+  E::::E       EEEEE M:::::::::M     M:::::::::M RR::::R      R::::R
+  E::::E             M::::::M:::M   M:::M::::::M   R:::R      R::::R
+  E:::::EEEEEEEEEE   M:::::M M:::M M:::M M:::::M   R:::RRRRRR:::::R
+  E::::::::::::::E   M:::::M  M:::M:::M  M:::::M   R:::::::::::RR
+  E:::::EEEEEEEEEE   M:::::M   M:::::M   M:::::M   R:::RRRRRR::::R
+  E::::E             M:::::M    M:::M    M:::::M   R:::R      R::::R
+  E::::E       EEEEE M:::::M     MMM     M:::::M   R:::R      R::::R
+EE:::::EEEEEEEE::::E M:::::M             M:::::M   R:::R      R::::R
+E::::::::::::::::::E M:::::M             M:::::M RR::::R      R::::R
+EEEEEEEEEEEEEEEEEEEE MMMMMMM             MMMMMMM RRRRRRR      RRRRRR
+
+[hadoop@ip-172-31-15-17 ~]$
+
