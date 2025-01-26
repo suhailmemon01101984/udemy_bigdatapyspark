@@ -1,3 +1,4 @@
+#problem statement: take input file: u.data and print rating and count of ratings and sort end result by rating value.
 from pyspark import SparkConf, SparkContext
 import collections
 
