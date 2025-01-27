@@ -1,3 +1,4 @@
+#problem statement: take input file: frakefriends.csv and for each age value, calculate average number of friends for that age value
 from pyspark import SparkContext, SparkConf
 
 sparkconfig=SparkConf().setMaster("local").setAppName("FriendsByAge")
