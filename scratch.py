@@ -1,24 +1,17 @@
-import re
-
 from pyspark import SparkConf, SparkContext
+import collections
 
-sparkconfig=SparkConf().setMaster("local").setAppName("WordCount")
+sparkconfig=SparkConf().setMaster("local").setAppName("RatingsCounter")
 sc=SparkContext(conf=sparkconfig)
-sc.setLogLevel("ERROR")
 
-def normalizeWords(text):
-    return re.compile(r'\W+',re.UNICODE).split(text.lower()) #\W+ to remove all non word characters and use it as a splitting pattern
+lines=sc.textFile("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/ml-100k/u.data")
 
-input=sc.textFile("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/book")
-words=input.flatMap(normalizeWords)
-wordCounts=words.map(lambda x:(x,1)).reduceByKey(lambda x,y:x+y)
-wordCounts_temp=wordCounts.map(lambda x: (x[1], x[0]))
-wordCountsSorted=wordCounts_temp.sortByKey()
-#wordCounts_temp=wordCounts.map(lambda x,y:(y,x)).sortByKey()
-#wordCountsSorted = wordCounts.sortBy(lambda x: (x[1]), ascending=False).map(lambda x: (x[1], x[0]))
-results=wordCountsSorted.collect()
-for eachrow in results:
-    cleanword=eachrow[1].encode('ascii','ignore')
-    if(cleanword):
-        print(f'{cleanword.decode()}:        {eachrow[0]}') #this .decode() was added to change from binary format to string...so eg: from  b'mindful' to just mindful
-quit()
+ratings=lines.map(lambda x: x.split()[2])
+
+results=ratings.countByValue()
+
+sortedresults=collections.OrderedDict(sorted(results.items()))
+
+for key,value in sortedresults.items():
+    print(key,value)
+
