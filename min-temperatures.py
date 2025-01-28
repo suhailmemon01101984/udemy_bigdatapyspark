@@ -11,7 +11,7 @@ def parseLine(line):
     fields = line.split(',')
     stationid = fields[0]
     entrytype = fields[2]
-    temperature = float(fields[3]) * 0.1 * (9.0 / 5.0) + 32.0
+    temperature = float(fields[3]) * 0.1 * (9.0 / 5.0) + 32.0 #the reason to multiply by 0.1 is because value is in tenths of degree celsius. you need to divide by 10 to get the actual temp in celsius
     return stationid, entrytype, temperature
 
 
