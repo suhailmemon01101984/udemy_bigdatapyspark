@@ -1,3 +1,5 @@
+#problem statement: take input file: 1800.csv and filter out the entries for min temperatures and then calculate minimum temp by stationid
+
 from pyspark import SparkConf, SparkContext
 import math
 
