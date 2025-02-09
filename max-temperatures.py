@@ -1,4 +1,4 @@
-#problem statement: take input file: 1800.csv and filter out the entries for max temperatures and then calculate maximum temp by stationid
+#problem statement: take input file: 1800.csv n filter out the entries for max temperatures and then calculate maximum temp by stationid
 
 from pyspark import SparkContext, SparkConf
 import math
