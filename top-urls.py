@@ -31,7 +31,7 @@ endpointCounts=logsDF2.groupBy(func.window(func.col("eventTime"),windowDuration=
 
 sortedEndpointCounts=endpointCounts.orderBy(func.col("count").desc())
 # Give the query a name: counts, Kick off our streaming query with the .start() call , dumping complete results to the console using outputMode("complete").format("console")
-query = ( statusCountsDF.writeStream.outputMode("complete").format("console").queryName("counts").start() )
+query = ( sortedEndpointCounts.writeStream.outputMode("complete").format("console").queryName("counts").start() )
 
 # Run forever until terminated
 query.awaitTermination()
