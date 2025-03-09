@@ -1,4 +1,4 @@
-#problem statement: take input file: fakefriends.csv and using pyspark dataframes, temp views, get rows of ppl who are teenagers between age 13 and 19 and calculate count by age in descending order of count
+#problem statement : take input file: fakefriends.csv and using pyspark dataframes, temp views, get rows of ppl who are teenagers between age 13 and 19 and calculate count by age in descending order of count
 
 from pyspark.sql import SparkSession
 from pyspark.sql import Row
