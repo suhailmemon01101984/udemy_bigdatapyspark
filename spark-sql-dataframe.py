@@ -1,4 +1,4 @@
-#problem statement : take input file: fakefriends-header.csv and using pyspark dataframes, temp views produce different results (documented below in code)
+#problem statement :take input file: fakefriends-header.csv and using pyspark dataframes, temp views produce different results (documented below in code)
 
 from pyspark.sql import SparkSession
 
