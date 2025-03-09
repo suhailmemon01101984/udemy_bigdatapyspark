@@ -1,8 +1,10 @@
+#problem statement : take input file: fakefriends-header.csv and using pyspark dataframes, temp views produce different results (documented below in code)
+
 from pyspark.sql import SparkSession
 
 sparkSessn=SparkSession.builder.appName("SparkSQL").getOrCreate()
 
-#if your file has header...you don't need to do the extra hop to rdd and then create a df out of it like in earlier example. using command below you can create df directly.
+#if your file has header...you don't need to do the extra hop to rdd and then create a df out of it like in earlier example. using command below you can create df directly. this code also assumes default delimiter as comma. but if your csv file has some other delimiter eg: tab then use this code: .option("delimiter", "\t") to specify the same.
 peopleDF=sparkSessn.read.option("header","true").option("inferSchema","true").csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/fakefriends-header.csv")
 
 print(type(peopleDF))
