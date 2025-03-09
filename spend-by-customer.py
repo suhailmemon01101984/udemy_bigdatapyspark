@@ -1,3 +1,5 @@
+#problem statement: take input file: customer-orders.csv and calculate spend amount by customer id and sort the results in ascending order of spend.
+
 from pyspark import SparkConf, SparkContext
 import math
 
