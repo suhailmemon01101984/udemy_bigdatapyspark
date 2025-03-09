@@ -1,3 +1,5 @@
+#problem statement: take input file: book and get all the words and calculate the count of each word in the book and then print results in ascending order of count
+
 import re
 
 from pyspark import SparkConf, SparkContext
