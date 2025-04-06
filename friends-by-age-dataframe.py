@@ -1,3 +1,5 @@
+#problem statement: take input file: fakefriends-header.csv and use different methods to print age and average number of friends sorted by age
+
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as func
 
