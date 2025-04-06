@@ -17,7 +17,7 @@ onlymintemps=df.filter(df.measure_type=="TMIN")
 
 station_n_temps=onlymintemps.select("stationID","temperature")
 
-minTempsByStation=station_n_temps.groupBy("stationID").min("temperature")
+minTempsByStation=station_n_temps.groupBy("stationID").min("temperature") # if you want to alias the column run it this way: station_n_temps.groupBy("stationID").agg(func.min("temperature").alias("minTemp"))
 
 minTempsByStationF=minTempsByStation.withColumn("Farenheit_temp", func.round(func.col("min(temperature)")*0.1*(9.0/5.0)+32, 2)).select("stationID", "Farenheit_temp").sort("Farenheit_temp")
 
