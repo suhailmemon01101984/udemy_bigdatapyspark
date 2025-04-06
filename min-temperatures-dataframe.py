@@ -1,3 +1,5 @@
+#problem statement: take input text file: 1800.csv which contains info on stations and temps and get minimum temperature for each stationid in Farenheit
+
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as func
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType
