@@ -1,26 +1,29 @@
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as func
 
-sparkSessn=SparkSession.builder.appName("FriendsByAge").getOrCreate()
+sparkSessn=SparkSession.builder.appName("WordCounts").getOrCreate()
+inputDF=sparkSessn.read.text("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/book")
+inputDF.printSchema()
 
-peopleDF=sparkSessn.read.option("header","true").option("inferSchema","true").csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/fakefriends-header.csv")
+wordsDF=inputDF.select(func.explode(func.split(inputDF.value,"\\W+")).alias("word"))
 
-print(type(peopleDF))
+wordsDF.printSchema()
 
-peopleDF.printSchema()
+print(type(wordsDF))
 
-friendsAvgByAge=peopleDF.groupBy("age").avg("friends").show()
 
-friendsAvgByAgeRounded=peopleDF.groupBy("age").agg(func.round(func.avg("friends"),2).alias("average_number_of_friends")).show()
+wordsWithoutEmptyStringDF=wordsDF.filter(wordsDF.word!="")
 
-friendsAvgByAgeRoundedSorted=peopleDF.groupBy("age").agg(func.round(func.avg("friends"),2).alias("average_number_of_friends")).sort("age", ascending=False).show(peopleDF.count())
+lowercaseWordsDF=wordsWithoutEmptyStringDF.select(func.lower(wordsWithoutEmptyStringDF.word).alias("word"))
 
-peopleDF.createOrReplaceTempView("TempView_people_header_vw")
+lowercaseWordsDF.printSchema()
 
-friendsAvgByAgeRoundedSortedSQL=sparkSessn.sql("select age, round(avg(friends),2) as average_number_of_friends from TempView_people_header_vw group by 1 order by 1 desc")
+wordCountsDF=lowercaseWordsDF.groupBy("word").count()
 
-for eachRow in friendsAvgByAgeRoundedSortedSQL.collect():
-    print(eachRow)
+print(type(wordCountsDF))
+
+wordCountsSortedDF=wordCountsDF.sort("count",ascending=False)
+
+wordCountsSortedDF.show(wordCountsSortedDF.count())
 
 sparkSessn.stop()
-
