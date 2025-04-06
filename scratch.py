@@ -1,33 +1,26 @@
 from pyspark.sql import SparkSession
-from pyspark.sql import Row
+from pyspark.sql import functions as func
 
-sparkSessn=SparkSession.builder.appName("SparkSQL").getOrCreate()
+sparkSessn=SparkSession.builder.appName("FriendsByAge").getOrCreate()
 
-def parseLine(line):
-    fields=line.split(',')
-    return Row(ID=int(fields[0]), name=str(fields[1].encode("UTF-8")), age=int(fields[2]), numFriends=int(fields[3]))
+peopleDF=sparkSessn.read.option("header","true").option("inferSchema","true").csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/fakefriends-header.csv")
 
+print(type(peopleDF))
 
-lines=sparkSessn.sparkContext.textFile("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/fakefriends.csv")
+peopleDF.printSchema()
 
-people=lines.map(parseLine)
+friendsAvgByAge=peopleDF.groupBy("age").avg("friends").show()
 
-peopleDF=sparkSessn.createDataFrame(people).cache()
+friendsAvgByAgeRounded=peopleDF.groupBy("age").agg(func.round(func.avg("friends"),2).alias("average_number_of_friends")).show()
 
-peopleDF.createOrReplaceTempView("temp_people_vw")
+friendsAvgByAgeRoundedSorted=peopleDF.groupBy("age").agg(func.round(func.avg("friends"),2).alias("average_number_of_friends")).sort("age", ascending=False).show(peopleDF.count())
 
-teenagersDF=sparkSessn.sql("select * from temp_people_vw where age>=13 and age<=19")
+peopleDF.createOrReplaceTempView("TempView_people_header_vw")
 
-print(type(teenagersDF))
+friendsAvgByAgeRoundedSortedSQL=sparkSessn.sql("select age, round(avg(friends),2) as average_number_of_friends from TempView_people_header_vw group by 1 order by 1 desc")
 
-for result in teenagersDF.collect():
-    print(result)
-
-peopleDF.groupBy("age").count().orderBy("count", ascending=False).show(peopleDF.count())
-
-countByAgeDF=sparkSessn.sql("select age, count(*) from temp_people_vw group by 1 order by 2 desc")
-
-for result in countByAgeDF.collect():
-    print(result)
+for eachRow in friendsAvgByAgeRoundedSortedSQL.collect():
+    print(eachRow)
 
 sparkSessn.stop()
+
