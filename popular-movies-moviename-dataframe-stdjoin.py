@@ -47,7 +47,7 @@ movieCountsWithMovieNames=sparkSessn.sql("select m.movieID, mn.movieTitle, count
 
 print(type(movieCountsWithMovieNames))
 
-movieCountsWithMovieNames.show(10,False)
+movieCountsWithMovieNames.show(10,False) # False means do not truncate the columns (i.e., show the full content of each column, even if it's long)
 
 #another way to collect. the [:10] is added for the top 10 rows
 print("|movieID|movieTitle|ratings_count|")
