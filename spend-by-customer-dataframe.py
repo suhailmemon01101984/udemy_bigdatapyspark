@@ -1,3 +1,4 @@
+#problem statement: take input text file: customer-orders.csv which contains info like customer id, item id and amount spent on item. get total amount spent by customer sorted by total amount spent
 #dataset containing customer id, item id and how much customer spent on that item. how much in total customer spent
 
 #"/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/customer-orders.csv"
