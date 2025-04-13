@@ -1,3 +1,5 @@
+#problem statement: take input text file: u.data which contains userid, movieid, rating and timestamp and file u.item which contains movie titles among other things  output most popular movie names and their IDs by rating count
+
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as func
 from pyspark.sql.types import IntegerType, StructType, StructField, StringType
