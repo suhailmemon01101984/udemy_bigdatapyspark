@@ -9,26 +9,26 @@ marvelNamesSchema=StructType([StructField("id", IntegerType(), True), \
 
 marvelNamesDF=sparkSessn.read.schema(marvelNamesSchema).option("sep", " ").csv("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/marvel-names")
 
-marvelNamesDF.show()
+#marvelNamesDF.show()
 
 marvelGraphDF=sparkSessn.read.text("/Users/suhailmemon/Documents/MACBOOKPRO/dell laptop/Desktop/git/udemy_bigdatapyspark/datafiles/marvel-graph")
 
-marvelGraphDF.show()
+#marvelGraphDF.show()
 
-marvelGraphDF.printSchema()
+#marvelGraphDF.printSchema()
 
 marvelGraphIDConnDF=marvelGraphDF.withColumn("id", func.split(func.col("value"), " ")[0]).withColumn("connections", func.size(func.split(func.col("value"), " "))-1)
 
-marvelTotalConnsByID=marvelGraphIDConnDF.groupBy("id").agg(func.sum("connections").alias("totalconnections")).sort(func.desc("totalconnections"))
+marvelTotalConnsByID=marvelGraphIDConnDF.groupBy("id").agg(func.sum("connections").alias("totalconnections"))
 
-marvelHeroMostPopularIDConn=marvelTotalConnsByID.first()
+marvelHeroIDConnWithSingleConns=marvelTotalConnsByID.filter(func.col("totalconnections")==1)
+marvelHeroIDConnWithZeroConns=marvelTotalConnsByID.filter(func.col("totalconnections")==0)
 
-print(marvelHeroMostPopularIDConn[0], marvelHeroMostPopularIDConn[1])
+marvelHeroNameConnWithSingleConns=marvelHeroIDConnWithSingleConns.join(marvelNamesDF,"id").select("name","totalconnections")
+marvelHeroNameConnWithSingleConns.show(marvelHeroNameConnWithSingleConns.count())
 
-marvelHeroMostPopularIDName=marvelNamesDF.filter(func.col("id")==marvelHeroMostPopularIDConn[0]).first()
+marvelHeroNameConnWithZeroConns=marvelHeroIDConnWithZeroConns.join(marvelNamesDF,"id").select("name","totalconnections")
+marvelHeroNameConnWithZeroConns.show(marvelHeroNameConnWithZeroConns.count())
 
-print(marvelHeroMostPopularIDName[0], marvelHeroMostPopularIDName[1])
-
-print(f"{marvelHeroMostPopularIDName[1]} is the most popular superhero with {marvelHeroMostPopularIDConn[1]} co-appearances")
 
 sparkSessn.stop()
