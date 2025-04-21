@@ -1,3 +1,5 @@
+#problem statement: take input files: marvel names and marvel graph and figure out the name of the superhero with the least amount of connections. the hero with the lest amount of connections is the most obscure superhero
+
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as func
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType
