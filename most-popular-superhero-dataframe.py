@@ -1,3 +1,4 @@
+#problem statement: take input files: marvel names and marvel graph and figure out the name of the superhero with the most amount of connections. the hero with the most amount of connections is the most popular superhero
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as func
 from pyspark.sql.types import IntegerType, StringType, StructType, StructField
