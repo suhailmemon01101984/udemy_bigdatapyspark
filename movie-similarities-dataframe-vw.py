@@ -1,3 +1,4 @@
+#problem statement: this program takes input as movie id and uses cosine logic to figure out similar movies. figure out all possible movie pairs watched by same person and then calculate cosine score for every possible movie pair and calculate count of ppl who have watched the same movie pair. higher cosine score and high ppl count indicates the movies in the movie pair are similar to each other.
 # this is a full redo of movie-similarities-dataframe.py but through using pyspark sql views. run below code with parameter as 50 which is the movieID for starwars. right click on file -> modify run configuration and put 50 under parameters and click OK
 #comment here here here
 from pyspark.sql import SparkSession
