@@ -1,9 +1,9 @@
 ###this program calculates degrees of separation between one hero and another hero id
 
-###prerequisite for this code. understand how the breadth first search algorithm works. if you have the udemy course refer video number:
-# 39(Superhero Degrees of Separation: Introducing Breadth-First Search,
-# 40 (Superhero Degrees of Separation: Accumulators, and Implementing BFS in Spark) and
-# 41 ([Activity] Superhero Degrees of Separation: Review the Code and Run it)
+###prerequisite for this code. understand how the breadth first search algorithm works. if you have the udemy course refer videos with title:
+# (Superhero Degrees of Separation: Introducing Breadth-First Search,
+# (Superhero Degrees of Separation: Accumulators, and Implementing BFS in Spark) and
+# ([Activity] Superhero Degrees of Separation: Review the Code and Run it)
 
 #Boilerplate stuff:
 from pyspark import SparkConf, SparkContext
